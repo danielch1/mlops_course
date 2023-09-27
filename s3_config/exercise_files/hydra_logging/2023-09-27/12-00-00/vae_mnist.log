@@ -1,0 +1,5 @@
+[2023-09-27 12:00:00,399][__main__][INFO] - Configuration: {'hparams': {'batch_size': 100, 'x_dim': 784, 'hidden_dim': 50, 'latent_dim': 20, 'lr': 0.005, 'epochs': 2, 'seed': 2137, 'dataset_path': '~/datasets'}}
+[2023-09-27 12:00:00,455][__main__][INFO] - Start training VAE...
+[2023-09-27 12:00:13,730][__main__][INFO] - Epoch 1 complete!,  Average Loss: 153.6537109048936
+[2023-09-27 12:00:29,864][__main__][INFO] - Epoch 2 complete!,  Average Loss: 120.53799186795702
+[2023-09-27 12:00:29,864][__main__][INFO] - Finish!!

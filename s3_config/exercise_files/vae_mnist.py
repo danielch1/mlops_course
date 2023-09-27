@@ -15,10 +15,12 @@ from torch.utils.data import DataLoader
 from torchvision.datasets import MNIST
 from torchvision.utils import save_image
 
+import logging
+log = logging.getLogger(__name__)
 
 @hydra.main(config_name="config.yaml")
 def train(config):
-    print(f"Configuration: {config}")
+    log.info(f"Configuration: {config}")
 
     cuda = False
     DEVICE = torch.device("cuda" if cuda else "cpu")
@@ -69,7 +71,7 @@ def train(config):
 
     optimizer = Adam(model.parameters(), lr=config.hparams.lr)
 
-    print("Start training VAE...")
+    log.info("Start training VAE...")
     model.train()
     for epoch in range(config.hparams.epochs):
         overall_loss = 0
@@ -86,10 +88,10 @@ def train(config):
 
             loss.backward()
             optimizer.step()
-        print(
+        log.info(
             f"Epoch {epoch+1} complete!,  Average Loss: {overall_loss / (batch_idx*config.hparams.batch_size)}"
         )
-    print("Finish!!")
+    log.info("Finish!!")
 
     # save weights
     torch.save(model, f"{os.getcwd()}/trained_model.pt")
