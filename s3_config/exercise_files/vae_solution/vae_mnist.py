@@ -30,11 +30,19 @@ def train(config):
     # Data loading
     mnist_transform = transforms.Compose([transforms.ToTensor()])
 
-    train_dataset = MNIST(hparams["dataset_path"], transform=mnist_transform, train=True, download=True)
-    test_dataset = MNIST(hparams["dataset_path"], transform=mnist_transform, train=False, download=True)
+    train_dataset = MNIST(
+        hparams["dataset_path"], transform=mnist_transform, train=True, download=True
+    )
+    test_dataset = MNIST(
+        hparams["dataset_path"], transform=mnist_transform, train=False, download=True
+    )
 
-    train_loader = DataLoader(dataset=train_dataset, batch_size=hparams["batch_size"], shuffle=True)
-    test_loader = DataLoader(dataset=test_dataset, batch_size=hparams["batch_size"], shuffle=False)
+    train_loader = DataLoader(
+        dataset=train_dataset, batch_size=hparams["batch_size"], shuffle=True
+    )
+    test_loader = DataLoader(
+        dataset=test_dataset, batch_size=hparams["batch_size"], shuffle=False
+    )
 
     encoder = Encoder(
         input_dim=hparams["x_dim"],
@@ -52,7 +60,9 @@ def train(config):
     from torch.optim import Adam
 
     def loss_function(x, x_hat, mean, log_var):
-        reproduction_loss = nn.functional.binary_cross_entropy(x_hat, x, reduction="sum")
+        reproduction_loss = nn.functional.binary_cross_entropy(
+            x_hat, x, reduction="sum"
+        )
         KLD = -0.5 * torch.sum(1 + log_var - mean.pow(2) - log_var.exp())
         return reproduction_loss + KLD
 
@@ -75,7 +85,9 @@ def train(config):
 
             loss.backward()
             optimizer.step()
-        log.info(f"Epoch {epoch+1} complete! Average Loss: {overall_loss / (batch_idx*hparams['batch_size'])}")
+        log.info(
+            f"Epoch {epoch+1} complete! Average Loss: {overall_loss / (batch_idx*hparams['batch_size'])}"
+        )
     log.info("Finish!!")
 
     # save weights
@@ -98,7 +110,9 @@ def train(config):
         noise = torch.randn(hparams["batch_size"], hparams["latent_dim"]).to(DEVICE)
         generated_images = decoder(noise)
 
-    save_image(generated_images.view(hparams["batch_size"], 1, 28, 28), "generated_sample.png")
+    save_image(
+        generated_images.view(hparams["batch_size"], 1, 28, 28), "generated_sample.png"
+    )
 
 
 if __name__ == "__main__":
