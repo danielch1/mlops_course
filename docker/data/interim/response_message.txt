@@ -1,0 +1,1 @@
+Based on trained model, your prediction is: I've created a dummy, but nice model!, 75
