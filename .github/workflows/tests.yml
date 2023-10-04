@@ -25,7 +25,6 @@ jobs:
         pip install pytest
         pytest -v
 
-jobs:
   build-on-windows:
 
     runs-on: windows-latest
