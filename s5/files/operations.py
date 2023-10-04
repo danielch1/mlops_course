@@ -1,5 +1,6 @@
 from utils import *
 
+
 def calculate():
     a_add_b = add(1, 5)
     a_sub_b = sub(1, 5)
