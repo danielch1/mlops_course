@@ -1,4 +1,4 @@
 [core]
     remote = remote_storage
 ['remote "remote_storage"']
-    url = gs://dch_bucket/
+    url = gs://dch_bucket2/
